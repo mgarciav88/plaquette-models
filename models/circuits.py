@@ -16,6 +16,10 @@ class Plaquette:
         for q_ind in q_list:
             self.circuit.h(self.q_register[q_ind])
 
+    def apply_x_gate(self, q_list):
+        for q_ind in q_list:
+            self.circuit.x(self.q_register[q_ind])
+
     def forward_entangle(self, qs_real, q_control):
         # entangle the qubits and induce the interaction
         for q_ind in qs_real:
@@ -28,6 +32,24 @@ class Plaquette:
             self.circuit.sdg(self.q_register[q_control])
             self.circuit.sdg(self.q_register[q_ind])
             self.circuit.cz(self.q_register[q_control], self.q_register[q_ind])
+
+    def rotate_qubits(self, index_only_h, qs_real):
+        qs_copy = qs_real.copy()
+        qs_copy.remove(index_only_h)
+        for q_ind in qs_copy:
+            self.circuit.h(self.q_register[q_ind])
+            self.circuit.s(self.q_register[q_ind])
+
+        self.circuit.h(self.q_register[index_only_h])
+
+    def backward_rotate_qubits(self, index_only_h, qs_real):
+        qs_copy = qs_real.copy()
+        qs_copy.remove(index_only_h)
+        self.circuit.h(self.q_register[index_only_h])
+
+        for q_ind in qs_copy:
+            self.circuit.sdg(self.q_register[q_ind])
+            self.circuit.h(self.q_register[q_ind])
 
     def time_evolution(self, q_control, time_factor=1):
         self.circuit.h(self.q_register[q_control])
@@ -67,9 +89,6 @@ class SinglePlaquette(Plaquette):
 
         c_register = ClassicalRegister(self.n_qubits, 'c')
 
-        self.circuit.sdg(self.q_register[qs_real[0]])
-        self.circuit.h(self.q_register[qs_real[0]])
-
         meas = QuantumCircuit(self.q_register, c_register)
         meas.barrier(self.q_register)
         meas.measure(self.q_register, c_register)
@@ -78,66 +97,25 @@ class SinglePlaquette(Plaquette):
 
     def generate_triangle_u1(self, q_control, qs_real):
         self.circuit.u2(np.pi / 2, np.pi / 2, self.q_register[q_control])  # np.pi in the latest notebook
-        for q_ind in qs_real:
-            self.circuit.x(self.q_register[q_ind])
-
+        self.apply_x_gate(qs_real)
         self.apply_h_gate(qs_real)
+
         self.forward_entangle(qs_real, q_control)
         self.time_evolution(q_control)
         self.backward_entangle(qs_real, q_control)
+
         self.apply_h_gate(qs_real)
 
-        for q_ind in qs_real:
-            self.circuit.h(self.q_register[q_ind])
+        for q_ind in qs_real[::-1]:
+            self.backward_rotate_qubits(q_ind, qs_real)
 
-        self.circuit.sdg(self.q_register[qs_real[0]])
-        self.circuit.h(self.q_register[qs_real[0]])  # sigma^y to q[0]
-        self.circuit.sdg(self.q_register[qs_real[1]])
-        self.circuit.h(self.q_register[qs_real[1]])  # sigma^y to q[2]
-        self.circuit.h(self.q_register[qs_real[2]])
+            self.forward_entangle(qs_real, q_control)
+            self.time_evolution(q_control, time_factor=-1)
+            self.backward_entangle(qs_real, q_control)
 
-        self.forward_entangle(qs_real, q_control)
-        self.time_evolution(q_control, time_factor=-1)
-        self.backward_entangle(qs_real, q_control)
+            self.rotate_qubits(q_ind, qs_real)
 
-        self.circuit.h(self.q_register[qs_real[0]])
-        self.circuit.s(self.q_register[qs_real[0]])
-        self.circuit.h(self.q_register[qs_real[1]])
-        self.circuit.s(self.q_register[qs_real[1]])
-        self.circuit.h(self.q_register[qs_real[2]])
-
-        self.circuit.sdg(self.q_register[qs_real[0]])
-        self.circuit.h(self.q_register[qs_real[0]])
-        self.circuit.h(self.q_register[qs_real[1]])
-        self.circuit.sdg(self.q_register[qs_real[2]])
-        self.circuit.h(self.q_register[qs_real[2]])
-
-        self.forward_entangle(qs_real, q_control)
-        self.time_evolution(q_control, time_factor=-1)
-        self.backward_entangle(qs_real, q_control)
-
-        self.circuit.h(self.q_register[qs_real[0]])
-        self.circuit.s(self.q_register[qs_real[0]])
-        self.circuit.h(self.q_register[qs_real[1]])
-        self.circuit.h(self.q_register[qs_real[2]])
-        self.circuit.s(self.q_register[qs_real[2]])
-
-        self.circuit.h(self.q_register[qs_real[0]])
-        self.circuit.sdg(self.q_register[qs_real[1]])
-        self.circuit.h(self.q_register[qs_real[1]])
-        self.circuit.sdg(self.q_register[qs_real[2]])
-        self.circuit.h(self.q_register[qs_real[2]])
-
-        self.forward_entangle(qs_real, q_control)
-        self.time_evolution(q_control, time_factor=-1)
-        self.backward_entangle(qs_real, q_control)
-
-        self.circuit.h(self.q_register[qs_real[0]])
-        self.circuit.h(self.q_register[qs_real[1]])
-        self.circuit.s(self.q_register[qs_real[1]])
-        self.circuit.h(self.q_register[qs_real[2]])
-        self.circuit.s(self.q_register[qs_real[2]])
-
+        self.circuit.u2(-np.pi / 2, -np.pi / 2, self.q_register[q_control])
 
     def generate_square_z2(self, q_control, qs_real):
         self.circuit.h(self.q_register[q_control])
