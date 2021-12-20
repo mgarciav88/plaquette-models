@@ -81,6 +81,16 @@ class SinglePlaquette(Plaquette):
         super().__init__(n_qubits, t, g)
         self.gauge_group = gauge_group
 
+    def __repr__(self):
+        plaquette_type = 'square' if self.n_qubits == 5 else 'triangle'
+        return str(
+            f'Single plaquette with params: \n'
+            f'n_qubits: {self.n_qubits}, \n'
+            f'plaquette: {plaquette_type}, \n'
+            f't: {self.t}, \n'
+            f'g: {self.g}, \n'
+            f'group: {self.gauge_group}')
+
     def generate_circuit(self, q_control: int):
         qs_real = list(range(self.n_qubits))
         qs_real.remove(q_control)
