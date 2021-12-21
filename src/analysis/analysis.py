@@ -5,11 +5,11 @@ from qiskit import transpile, QuantumCircuit
 from qiskit.providers.ibmq import IBMQJobManager, IBMQBackend
 from qiskit.result import Result
 
-from analysis.error_mitigation import get_counts_result
-from analysis.utils import get_all_spin_up_state, get_gauss_base_state
-from analysis.zne_extrapolation import custom_folding
-from models.circuits import SinglePlaquette
-from models.constants import Groups
+from src.analysis.error_mitigation import get_counts_result
+from src.analysis.utils import get_all_spin_up_state, get_gauss_base_state
+from src.analysis.zne_extrapolation import custom_folding
+from src.models.circuits import SinglePlaquette
+from src.models.circuits import Groups
 
 
 @dataclass

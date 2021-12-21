@@ -7,8 +7,8 @@ from qiskit import QuantumRegister, QuantumCircuit, ClassicalRegister, execute
 from qiskit.ignis.mitigation import complete_meas_cal, CompleteMeasFitter
 from qiskit.providers.ibmq import IBMQBackend
 
-from analysis.constants import MATRIX, STATES
-from observables.gauss import gauss_law, gauss_2, gauss_law_squared
+from src.analysis.constants import MATRIX, STATES
+from src.observables.gauss import gauss_law, gauss_2, gauss_law_squared
 
 
 def get_counts_result(output_correction, result_hpc, result_key: str, gauss_key: str, time_vector: list,

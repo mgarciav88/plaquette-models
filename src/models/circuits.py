@@ -3,7 +3,7 @@ import itertools
 import numpy as np
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
 
-from models.constants import Groups
+from src.models.constants import Groups
 
 
 class Plaquette:
