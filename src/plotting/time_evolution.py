@@ -36,8 +36,6 @@ def plot_time_evolution(df_results):
         ['gauss_law_squared', 'gauss_law_squared_corrected']].agg(
         [np.mean, np.std]).reset_index()
 
-    # print(grouped_df.head())
-
     no_zne_df = grouped_df[grouped_df.scale_factor == 1.0]
     result_types['Original']['central'] = no_zne_df['original']['mean'].to_numpy()
     result_types['Original']['error'] = no_zne_df['original']['std'].to_numpy()
@@ -115,10 +113,7 @@ def plot_time_evolution(df_results):
     # %%
     plt.rcParams.update({
         'font.size': 14,
-        # 'text.usetex': True,
-        # 'text.latex.preamble': r'\usepackage{amsfonts}'
     })
-    # plotting some of the data (rather than all):
 
     fig = plt.figure(figsize=(8, 6))
 
@@ -134,14 +129,5 @@ def plot_time_evolution(df_results):
             plt.errorbar(time_scale, res_vals['central'], res_vals['error'], fmt='', color='blue', marker='s', ls='-',
                          capsize=7, label='Readout + ZNE')
 
-    # plt.plot(time_vector, simulator_count, marker='s', linestyle='dotted',color='black', label='Simulator')
-    # plt.plot(time_vector, simulator_count, '-.', color='black', label='Simulator')
-    # plt.plot(time_vector_line, simulator_count_line, linestyle='dashed', color='black', label='Simulator')
-    plt.ylim((-0.02, .255))
-    plt.xlabel('g t ', fontsize=24)
-    plt.ylabel('L(t) = p(1100)$', fontsize=24)
-    plt.title('U(1) theory (square plaquette), g=2.0', fontsize=24)
-    plt.text(-.215, .276, 'a.', fontsize=38, fontweight='heavy')
-
-    plt.legend(fontsize=16)
-    plt.savefig('LechoState1_u1_sqr.pdf')
+    plt.legend()
+    plt.show()

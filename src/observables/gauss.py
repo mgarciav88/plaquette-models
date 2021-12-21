@@ -19,10 +19,10 @@ def gauss_law(counts: dict, mitigated_counts: dict, shots: int):
 
 
 def sector_2(gauss_key: str, counts: dict, mitigated_counts: dict, shots: int):
-    gauss2 = counts.get(gauss_key, 0) / shots
-    gauss2_corrected = mitigated_counts.get(gauss_key, 0) / shots
+    sector_2_obs = counts.get(gauss_key, 0) / shots
+    sector_2_obs_corrected = mitigated_counts.get(gauss_key, 0) / shots
 
-    return gauss2, gauss2_corrected
+    return sector_2_obs, sector_2_obs_corrected
 
 
 def gauss_law_squared(counts: dict, mitigated_counts: dict, shots: int):

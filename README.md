@@ -53,6 +53,16 @@ To obtain access to the quantum systems.
 Two notebooks are included in the notebooks directory:
 
 1. circuits: includes examples showing how to generate and visualize the basic circuits used in the paper.
-2. experiments: includes examples on how to run the experiments and generate some of the plots presented in the paper. 
-Be aware that plotting functionality is very limited to specific results, so you would probably need to create your own 
-plotting functionality to obtain specific results.
+2. experiments: includes examples on how to run the experiments, generate the results (in the form of dataframes) 
+and generate some of the plots presented in the paper. Be aware that plotting functionality is very limited to specific 
+results, so you would probably need to create your own plotting methods to obtain specific results.
+
+## Modules structure
+
+Modules in the src directory are organized in the following way:
+
+* analysis: includes code to process the experiment's results, including readout error mitigation and zero-noise 
+extrapolation.
+* models: includes code to build the circuits used in the experiments.
+* observables: includes code to compute the gauss law observables.
+* plotting: includes code to plot results from the experiments.

@@ -46,15 +46,15 @@ def get_counts_result(output_correction, result_hpc, result_key: str, gauss_key:
             corrected_counts = meas_filter.apply(non_corrected_counts)
             corrected_one_count = apply_ignis_error_correction(corrected_counts, exp_ind, result_key, shots)
             gauss_law_obs, gauss_law_obs_corrected = gauss_law(non_corrected_counts, corrected_counts, shots)
-            gauss_2_obs, gauss_2_obs_corrected = sector_2(gauss_key, non_corrected_counts, corrected_counts,
-                                                          shots)
+            sector_2_obs, sector_2_obs_corrected = sector_2(gauss_key, non_corrected_counts, corrected_counts,
+                                                            shots)
             gauss_law_sq_obs, gauss_law_sq_obs_corrected = gauss_law_squared(non_corrected_counts, corrected_counts,
                                                                              shots)
             experiment_result.update({
                 'gauss_law': gauss_law_obs,
                 'gauss_law_corrected': gauss_law_obs_corrected,
-                'sector_2': gauss_2_obs,
-                'sector_2_corrected': gauss_2_obs_corrected,
+                'sector_2': sector_2_obs,
+                'sector_2_corrected': sector_2_obs_corrected,
                 'gauss_law_squared': gauss_law_sq_obs,
                 'gauss_law_squared_corrected': gauss_law_sq_obs_corrected,
             })
