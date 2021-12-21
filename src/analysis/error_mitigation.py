@@ -8,7 +8,7 @@ from qiskit.ignis.mitigation import complete_meas_cal, CompleteMeasFitter
 from qiskit.providers.ibmq import IBMQBackend
 
 from src.analysis.constants import MATRIX, STATES
-from src.observables.gauss import gauss_law, gauss_2, gauss_law_squared
+from src.observables.gauss import gauss_law, sector_2, gauss_law_squared
 
 
 def get_counts_result(output_correction, result_hpc, result_key: str, gauss_key: str, time_vector: list,
@@ -46,8 +46,8 @@ def get_counts_result(output_correction, result_hpc, result_key: str, gauss_key:
             corrected_counts = meas_filter.apply(non_corrected_counts)
             corrected_one_count = apply_ignis_error_correction(corrected_counts, exp_ind, result_key, shots)
             gauss_law_obs, gauss_law_obs_corrected = gauss_law(non_corrected_counts, corrected_counts, shots)
-            gauss_2_obs, gauss_2_obs_corrected = gauss_2(gauss_key, non_corrected_counts, corrected_counts,
-                                                         gauss_law_obs, gauss_law_obs_corrected, shots)
+            gauss_2_obs, gauss_2_obs_corrected = sector_2(gauss_key, non_corrected_counts, corrected_counts,
+                                                          shots)
             gauss_law_sq_obs, gauss_law_sq_obs_corrected = gauss_law_squared(non_corrected_counts, corrected_counts,
                                                                              shots)
             experiment_result.update({

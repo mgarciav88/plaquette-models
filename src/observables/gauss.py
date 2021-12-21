@@ -18,23 +18,9 @@ def gauss_law(counts: dict, mitigated_counts: dict, shots: int):
     return obs, obs_corrected
 
 
-def gauss_2(gauss_key: str, counts: dict, mitigated_counts: dict, obs: int, obs_corrected: int, shots: int):
+def sector_2(gauss_key: str, counts: dict, mitigated_counts: dict, shots: int):
     gauss2 = counts.get(gauss_key, 0) / shots
     gauss2_corrected = mitigated_counts.get(gauss_key, 0) / shots
-
-    links = [0, 0, 0, 0, 0]
-    for links[0] in range(2):
-        for links[1] in range(2):
-            for links[2] in range(2):
-                for links[3] in range(2):
-                    for links[4] in range(2):
-                        s = ''
-                        s += str(links[0]) + str(links[1]) + str(links[2]) + str(links[3]) + str(links[4])
-                        add_links = (2 * links[0] - 1) * (2 * links[1] - 1)
-                        add_corrected = add_links * mitigated_counts.get(s, 0) / shots
-                        obs_corrected += add_corrected
-                        add = add_links * counts.get(s, 0) / shots
-                        obs += add
 
     return gauss2, gauss2_corrected
 
