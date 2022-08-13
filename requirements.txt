@@ -44,7 +44,7 @@ lxml==4.6.3
 MarkupSafe==1.1.1
 matplotlib==3.4.2
 matplotlib-inline==0.1.2
-mistune==0.8.4
+mistune==2.0.3
 mitiq==0.11.1
 more-itertools==8.7.0
 mpmath==1.2.1
