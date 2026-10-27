@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the paper below."
+title: "plaquette-models"
+license: MIT
+repository-code: "https://github.com/mgarciav88/plaquette-models"
+authors:
+  - family-names: Huffman
+    given-names: Emilie
+  - family-names: García Vera
+    given-names: Miguel
+  - family-names: Banerjee
+    given-names: Debasish
+preferred-citation:
+  type: article
+  title: "Toward the real-time evolution of gauge-invariant Z2 and U(1) quantum link models on noisy intermediate-scale quantum hardware with error mitigation"
+  authors:
+    - family-names: Huffman
+      given-names: Emilie
+    - family-names: García Vera
+      given-names: Miguel
+    - family-names: Banerjee
+      given-names: Debasish
+  journal: "Phys. Rev. D"
+  volume: 106
+  issue: 9
+  start: 094502
+  year: 2022
+  month: 11
+  doi: "10.1103/PhysRevD.106.094502"

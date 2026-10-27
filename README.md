@@ -1,7 +1,8 @@
 # Plaquette models
 
 This repo contains code and jupyter notebooks that can be used to reconstruct the results presented in
-[ Real-time dynamics of Plaquette Models using NISQ Hardware](https://arxiv.org/abs/2109.15065).
+[Toward the real-time evolution of gauge-invariant Z2 and U(1) quantum link models on noisy intermediate-scale quantum hardware with error mitigation](https://doi.org/10.1103/PhysRevD.106.094502)
+(Phys. Rev. D 106, 094502; preprint: [Real-time dynamics of Plaquette Models using NISQ Hardware](https://arxiv.org/abs/2109.15065)).
 
 The repo is organized in such a way that the python modules are all part of the src module, while notebooks includes 
 the jupyter notebooks with examples on how to use the different modules. Be aware that this is written so that 
@@ -69,8 +70,29 @@ extrapolation.
 
 ## License and citation
 
-Released under the MIT License (see `LICENSE`). If you use this code, please cite
-"Real-time dynamics of Plaquette Models using NISQ Hardware" ([arXiv:2109.15065](https://arxiv.org/abs/2109.15065)).
+Released under the MIT License (see `LICENSE`). If you use this code, please cite:
 
-This project depends on Qiskit (including Ignis; Apache-2.0) and Mitiq, which keep their own licenses.
+E. Huffman, M. García Vera and D. Banerjee, *Toward the real-time evolution of gauge-invariant Z2 and U(1) quantum link
+models on noisy intermediate-scale quantum hardware with error mitigation*, Phys. Rev. D **106**, 094502 (2022),
+[doi:10.1103/PhysRevD.106.094502](https://doi.org/10.1103/PhysRevD.106.094502)
+(preprint: [arXiv:2109.15065](https://arxiv.org/abs/2109.15065)).
+
+```bibtex
+@article{PhysRevD.106.094502,
+  title = {Toward the real-time evolution of gauge-invariant ${\mathbb{Z}}_{2}$ and $U(1)$ quantum link models on noisy intermediate-scale quantum hardware with error mitigation},
+  author = {Huffman, Emilie and Garc{\'{\i}}a Vera, Miguel and Banerjee, Debasish},
+  journal = {Phys. Rev. D},
+  volume = {106},
+  issue = {9},
+  pages = {094502},
+  numpages = {16},
+  year = {2022},
+  month = {Nov},
+  publisher = {American Physical Society},
+  doi = {10.1103/PhysRevD.106.094502},
+  url = {https://link.aps.org/doi/10.1103/PhysRevD.106.094502}
+}
+```
+
+This project depends on Qiskit (including Ignis; Apache-2.0) and Mitiq (GPL-3.0), which keep their own licenses.
 The readout-mitigation helper follows the workflow in the Qiskit Ignis documentation.
