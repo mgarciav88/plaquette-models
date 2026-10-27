@@ -159,6 +159,7 @@ class CustomErrorMitigation:
         return error_correction
 
 
+# Follows the measurement-error-mitigation workflow from the Qiskit Ignis documentation (Apache-2.0).
 class IgnisErrorMitigation:
     def __init__(self, n_qubits: int = 4, shots: int = 1000):
         self.n_qubits = n_qubits
