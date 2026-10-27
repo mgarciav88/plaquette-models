@@ -66,3 +66,11 @@ extrapolation.
 * models: includes code to build the circuits used in the experiments.
 * observables: includes code to compute the gauss law observables.
 * plotting: includes code to plot results from the experiments.
+
+## License and citation
+
+Released under the MIT License (see `LICENSE`). If you use this code, please cite
+"Real-time dynamics of Plaquette Models using NISQ Hardware" ([arXiv:2109.15065](https://arxiv.org/abs/2109.15065)).
+
+This project depends on Qiskit (including Ignis; Apache-2.0) and Mitiq, which keep their own licenses.
+The readout-mitigation helper follows the workflow in the Qiskit Ignis documentation.
